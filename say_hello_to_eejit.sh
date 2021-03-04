@@ -31,9 +31,19 @@ cmake --install $build_prefix
 
 
 # Tests ------------------------------------------------------------------------
-# Show dependencies of installed target on shared libraries (Boost, HDF5, ...).
+# Show dependencies of *built* target on shared libraries (Boost, HDF5, ...).
 # All of them should be resolved. There is no need for LD_LIBRARY_PATH.
-ldd $install_prefix/bin/say_hello_to_eejit
+ldd $build_prefix/say_hello_to_eejit
 
 # Make sure target works. There is no need for LD_LIBRARY_PATH.
-$install_prefix/bin/say_hello_to_eejit
+$build_prefix/say_hello_to_eejit
+
+
+# # Show dependencies of *installed* target on shared libraries (Boost, HDF5, ...).
+# # All of them may be resolved. There may be a need for LD_LIBRARY_PATH,
+# # depending on the RPATH settings of the project.
+# # https://gitlab.kitware.com/cmake/community/-/wikis/doc/cmake/RPATH-handling
+# ldd $install_prefix/bin/say_hello_to_eejit
+# 
+# # Make sure target works. There is no need for LD_LIBRARY_PATH.
+# $install_prefix/bin/say_hello_to_eejit

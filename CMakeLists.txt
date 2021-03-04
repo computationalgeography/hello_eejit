@@ -28,7 +28,7 @@ endif()
 
 # Configure our own software ---------------------------------------------------
 add_executable(say_hello_to_eejit
-    hello_eejit)
+    hello_eejit.cpp)
 
 target_link_libraries(say_hello_to_eejit
     PRIVATE

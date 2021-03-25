@@ -1,4 +1,5 @@
 #include <boost/filesystem.hpp>
+#include <gdal_priv.h>
 #include <hdf5.h>
 #include <cstdlib>
 #include <iostream>
@@ -29,6 +30,22 @@ int main()
         boost::filesystem::path world{"World"};
         std::cout
             << "The Boost filesystem library says " << (hello / world) << " as well!" << std::endl;
+    }
+
+    // GDAL
+    {
+        GDALAllRegister();
+
+        std::cout << "The folowing raster drivers from the GDAL library say hi:";
+
+        GDALDriverManager* driver_manager{GetGDALDriverManager()};
+
+        for(int i = 0; i < driver_manager->GetDriverCount(); ++i)
+        {
+            std::cout << " " << driver_manager->GetDriver(i)->GetDescription();
+        }
+
+        std::cout << std::endl;
     }
 
     return EXIT_SUCCESS;

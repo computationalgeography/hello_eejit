@@ -1,3 +1,7 @@
+# This is the main CMake script. It should be as plain and simple as
+# possible. No platform specific stuff in here. Tweaks for platforms should
+# be handled by the caller (toolchain files, cmake command arguments,
+# environment variables).
 cmake_minimum_required(VERSION 3.19)
 project(hello_eejit VERSION 0.0.0 LANGUAGES C CXX)
 include(GNUInstallDirs)
@@ -19,11 +23,7 @@ if(NOT HDF5_IS_PARALLEL)
     message(NOTICE "HDF5 is not built with support for parallel I/O")
 endif()
 
-# TODO
-# GDAL
-# find_package(gdal)
-
-# GDAL, GLEW
+find_package(GDAL REQUIRED)
 
 
 # Configure our own software ---------------------------------------------------
@@ -32,6 +32,7 @@ add_executable(say_hello_to_eejit
 
 target_link_libraries(say_hello_to_eejit
     PRIVATE
+        GDAL::GDAL
         hdf5::hdf5
         Boost::filesystem)
 

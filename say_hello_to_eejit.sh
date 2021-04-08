@@ -9,7 +9,7 @@ module load userspace/all opt/all
 module load libraries/zstd/1.3.7
 module load gcc/10.2.0
 module load openmpi/gcc-10.2.0/4.0.4
-module load cmake/3.20.0rc2
+module load cmake/3.20.0
 module load libraries/libboost/1.75.0
 module load hdf5/1.12.0parIO
 module load libraries/GDAL/3.2.2parIO

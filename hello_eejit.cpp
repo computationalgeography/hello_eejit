@@ -6,11 +6,6 @@
 #include <string>
 
 
-// #ifndef H5_HAVE_THREADSAFE
-// #error "The HDF5 libraries must be compiled with enabled thread safety support."
-// #endif
-
-
 int main()
 {
     // HDF5

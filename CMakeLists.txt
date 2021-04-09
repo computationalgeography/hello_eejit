@@ -5,6 +5,7 @@
 cmake_minimum_required(VERSION 3.19)
 project(hello_eejit VERSION 0.0.0 LANGUAGES C CXX)
 include(GNUInstallDirs)
+include(CheckCXXSymbolExists)
 
 
 # Configure and find 3rd party software ----------------------------------------
@@ -21,6 +22,13 @@ find_package(HDF5 REQUIRED
 
 if(NOT HDF5_IS_PARALLEL)
     message(NOTICE "HDF5 is not built with support for parallel I/O")
+endif()
+
+set(CMAKE_REQUIRED_INCLUDES ${HDF5_INCLUDE_DIRS})
+check_cxx_symbol_exists(H5_HAVE_THREADSAFE "hdf5.h" have_h5_have_threadsafe)
+
+if(NOT have_h5_have_threadsafe)
+    message(SEND_ERROR "HDF5 is not built with support for thread safety")
 endif()
 
 find_package(GDAL REQUIRED)
